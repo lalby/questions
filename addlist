@@ -1,0 +1,116 @@
+#include <iostream>
+using namespace std;
+
+struct Node
+{
+    char data;
+    Node * next;
+    
+    Node (){ next=nullptr;}
+};
+
+
+class list 
+{
+    Node *head;
+    
+    public:
+    
+    list(std::string s)
+    {
+        Node *curr=nullptr;
+        head=nullptr;
+        
+        for ( auto v: s)
+        {
+            Node *tmp=new Node;
+            tmp->data=v;
+            
+            if(head == nullptr)
+            {
+                head=curr=tmp;
+            }
+            else
+            {
+                curr->next=tmp;
+                curr=tmp;
+            }
+        }
+        
+        
+    }
+    
+    
+    void display()
+    {
+        Node *curr=head;
+        
+        while(curr != nullptr)
+        {
+            std::cout<<"\n"<<curr->data;
+            curr=curr->next;
+        }    
+    }
+    
+    
+    void reverse()
+    {
+        Node *curr,*prev,*tmp;
+        
+        curr=head;
+        
+        while(curr->next !=nullptr)
+        {
+           
+            if(head==curr)
+            {
+                prev=curr;
+                curr=curr->next;
+            }    
+            else
+            {
+                tmp=curr->next;
+                curr->next=prev;
+                prev=curr;
+                curr=tmp;
+            }
+        }
+        
+        head->next=nullptr;
+        head=curr;
+        head->next=prev;
+    }
+    
+    
+    void add(list *l1,list *l2, list *sum )
+    {
+        l1->reverse();
+        l2->reverse();
+        
+        
+        while(l1 && l2)
+        {
+            int s= atoi (l1->Node->data) + atoi(l2->Node->data);
+            std::cout<<"\n"<<s;
+        }
+    }
+    
+    
+};
+
+
+int main()
+{
+    list list1("123456789");
+    list list2("123456789");
+    //list.display();
+    list sum;
+    add(list1,list2,sum);
+    
+    sum.revers();
+    sum.display();
+    
+    
+
+    return 0;
+}
