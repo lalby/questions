@@ -1,0 +1,40 @@
+template <typename T>
+class smartpointer
+{
+    T* p;
+    
+    public:
+     smartpointer(T *t) : p(t) {}
+    
+    T & operator * () { return *p;}
+    T * operator ->() { return p;}
+    
+    ~smartpointer() { delete p; std::cout<<" destroyed "; }
+    
+};
+
+class abc
+{
+    public:
+    int x;
+    int y;
+    
+};
+
+
+void foo(abc &p)
+{
+    std::cout<<p.y;
+}
+
+
+int main()
+{
+    {
+        
+        smartpointer<abc> p(new abc);
+        std::cout<<p->x;
+        foo(*p);
+    }
+    return 0;
+}
